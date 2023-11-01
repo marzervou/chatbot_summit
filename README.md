@@ -1,11 +1,11 @@
 # Chatbot Summit 2023 Q/A Bot
 
-This a repo to create a QA Retrieval Bot using both Open LLM .\
+This a repo to create a QA Retrieval Bot using an Open LLM .\
 To get started please change the configuration notebook in **util/notebook-config.py**. 
 
-Please look at the documentation Below on configuration for specific LLM's
+Please look at the documentation below on how to run the demo.
 
-Please change the **util/notebook-config.py** to point to the location where your files are stored.
+Please change the **util/notebook-config.py** to point to the location where your files are stored. This takes the pdfs and extracts the text.
 ```
 config['loc']  = <"Location where the files are stored">
 ```
@@ -48,8 +48,32 @@ Refer to these steps to download the key : https://huggingface.co/docs/api-infer
 config['model_id'] = 'meta-llama/Llama-2-XXb-chat-hf'
 config['HUGGING_FACE_HUB_TOKEN'] = '<your HF AI API Key>'
 ```
-Note : to need to keep 02_load_model Notebook running to have the API running
+Note : Keep load_model Notebook running to have the API running
 
 
 ## Embedding Model
 The open LLM embedding can be changed by over-riding the Dictionary in utils/notebook-config.py
+
+
+# How to run the App
+## 01_Build_Document_Index
+Builds the vector store in the location specified in the cofig file. FAISS vector store is being used here. 
+
+## load_model
+Before Running the application notebook, run the load model as it launches the TGI pipeline that hosts the model. [Text Generation Inference] https://huggingface.co/text-generation-inference
+
+## 02. The Application
+This notebook assembles the application:
+It loads:
+- the model
+- the vector store (created in the previous step)
+
+And creates a Flask App so that we can serve it as an API
+
+## 03_Hit_Proxy
+Hit the API to get some LLM answers!!
+
+
+--- 
+All the code that executes the LLM logic can be found util/qabot.py
+All the TGI inference logic can be found util/mptbot.py
