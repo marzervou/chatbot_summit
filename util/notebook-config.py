@@ -35,7 +35,7 @@ _ = spark.catalog.setCurrentDatabase(config['database_name'])
 import os
 
 if "Llama-2" in config['model_id']:
-  config['HUGGING_FACE_HUB_TOKEN'] = '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'
+  config['HUGGING_FACE_HUB_TOKEN'] = 'xxxxx'
 
 # COMMAND ----------
 
